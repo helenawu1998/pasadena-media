@@ -1,0 +1,15 @@
+  
+{% extends "base.html" %}
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+{% block page %}
+  <div class="container">
+    <div class="jumbotron">
+      <h3>Hi, {{ user.username }}!</h3>
+      <h1>Announcements</h1>
+        <p class="lead"></p>
+        <p><a class="btn btn-lg btn-success" href="/" role="button">Apply</a></p>
+    </div>
+  </div>
+{% endblock %}
