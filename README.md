@@ -1,5 +1,7 @@
-# pasadena-media
-Web application for the non-profit Pasadena Media featuring a customized directory service.
+# Pasadena Media (pasadena-media)
+Web application built for the non-profit Pasadena Media featuring a customized directory service.
+
+Developers: Helena Wu, Tarini Singh, Ajay Natarajan, Eugene Shao
 
 # Setting up your environment
 - Clone this repository. 
