@@ -1,4 +1,5 @@
 import flask
+from app.modules.directory_search import blueprint
 
 @blueprint.route("/directory_search")
 def directory_search():

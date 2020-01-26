@@ -1,4 +1,5 @@
 import flask
+from app.modules.login import blueprint
 
 @blueprint.route("/login")
 def login():
