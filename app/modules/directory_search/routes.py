@@ -16,7 +16,7 @@ def index():
     return render_template('directory_search.html', form=search)
 
 
-@app.route('/directory_search/results')
+@blueprint.route('/directory_search/results')
 def search_results(search):
     results = []
     search_string = search.data['name']
