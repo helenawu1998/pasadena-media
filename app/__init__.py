@@ -1,9 +1,12 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
 from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
+# Database initialization
+db = SQLAlchemy(app)
 Bootstrap(app)
 
 # Load blueprint modules
@@ -14,4 +17,4 @@ app.register_blueprint(login.blueprint)
 from app.modules import profile
 app.register_blueprint(profile.blueprint)
 
-from app import routes
+from app import routes, models
