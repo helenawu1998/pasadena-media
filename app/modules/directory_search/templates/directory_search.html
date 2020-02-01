@@ -4,12 +4,16 @@
 {{ super() }}
 {% endblock %}
 
-<!-- Unsure where to put the header
-	<head>
-		<title>Person Search Database</title>
-	</head>
--->
 {% block page %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='directory_search/directory_search.css') }}">
+  {% block javascript %}
+      <script src="{{ url_for('static',filename='directory_search/directory_search.js') }}"></script>
+  {% endblock %}
+</head>
+
+
 <!-- Ok, so I'm using a search bar example from online lmao -->
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -21,10 +25,22 @@
   {% endif %}
 {% endwith %}
 
+
+
+
+<div id="myDIV" class="title">
+  <h2 style="margin:5px">Search Functionality</h2>
+  <input type="text" id="myInput" placeholder="Role/Occupation">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL">
+
+</ul>
+
 {% from "_formhelpers.html" import render_field %}
 <form method=post>
   <dl>
-    {{ render_field(form.select) }}
     <p>
     {{ render_field(form.name) }}
   </dl>
