@@ -1,0 +1,89 @@
+
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+{% endblock %}
+
+## results variable is passed in from routes.py containing database queries
+## classes should change for the css
+{% block page %}
+	<div class='profile_results' id='prof_info' style='float: none; width: 75%; margin-left: 15%; margin-right: 15%; padding-bottom: 25px'>
+		{% if results is none %}
+			No results found
+		{% else %}
+			{% for res in results %}
+				## Change the tags for res so that they match with schema values
+				<h2 class="pos-left">
+					{{ res['preferred_name'] or res['first_name'] }}
+					{{ res['last_name'] }}
+				</h2>
+				{% if res['picture'] %}
+				<div style="margin-left: -15px;" class='pos-left col-md-8'>
+				{% else %}
+				<div>
+				{% endif %}
+					## Email, Phone, Gender, Position, Classes, Notes
+					<ul class='list-group list-group-root'>
+						{% if res['contact_email'] %} ##'contact_email' not in hidden_fields %}
+							<li class='list-group-item'>
+								<strong>Contact Email:</strong>:
+								<a href='mailto:{{ res["contact_email"] }}'>{{ res['contact_email'] }}</a>
+								{{ res['contact_email'] }}
+							</li>
+						{% endif %}
+						{% if res['phone'] %} ##'phone' not in hidden_fields %}
+							<li class='list-group-item'>
+								<strong>Phone Number:</strong>:
+								{{ res['phone'] }}
+							</li>
+						{% endif %}
+						{% if 'gender_string' in res and 'gender_string' not in hidden_fields %}
+							<li class='list-group-item'>
+								<strong>Gender:</strong>:
+								{{ res['gender_string'] }}
+							</li>
+						{% endif %}
+						{% if res['positions'] and 'positions' not in hidden_fields %}
+							<li class='list-group-item'>
+								<strong>Position{% if res['positions']|length > 1 %}s{% endif %}</strong>:
+							</li>
+							<ul class='list-group'>
+								{% for position in res['positions'] %}
+									<li class='list-group-item'>
+										{{ position }}
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+						{% if res['classes'] and 'classes' not in hidden_fields %}
+							<li class='list-group-item'>
+								<strong>Classes{% if res['classes']|length > 1 %}s{% endif %}</strong>:
+							</li>
+							<ul class='list-group'>
+								{% for past_class in res['classes'] %}
+									<li class='list-group-item'>
+										{{ past_class }}
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+						{% if res['notes'] and 'notes' not in hidden_fields %}
+							<li class='list-group-item'>
+								<strong>Notes:</strong>:
+								{{ res['notes'] }}
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+				## Picture
+				{% if res['picture'] and 'picture' not in hidden_fields %}
+					<div class='col-md-4'>
+						## Figure out how to get the image
+						<img src='{{ url_for("directory_search.get_image", user_id=user_id) }}' style='max-width: 200px; max-height: 250px' />
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</div>
+}
+{% endblock %}

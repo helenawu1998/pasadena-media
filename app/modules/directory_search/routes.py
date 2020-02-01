@@ -1,11 +1,10 @@
 from app import app
 from app.modules.directory_search.forms import PersonSearchForm
 from app.modules.directory_search import blueprint
-from flask import flash, render_template, request, redirect
+from flask import flash, render_template, request, redirect, url_for
 # from [database] import database class
 
 #init_db()
-
 
 @blueprint.route('/directory_search', methods=['GET', 'POST'])
 def index():
@@ -21,21 +20,21 @@ def search_results(search):
     results = []
     search_string = search.data['name']
 
+    # Somehow search for the name
     if search.data['name'] == '':
         qry = db_session.query() # Database query class name
         results = qry.all()
 
+    # If there are no results
     if not results:
-        app.secret_key = 'super secret key'
-        app.config['SESSION_TYPE'] = 'filesystem'
-
-        #sess.init_app(app)
         flash('No results found!')
-        return redirect('/directory_search')
+        return redirect(url_for('directory_search.index'))
     else:
         # display results
         return render_template('results.html', results=results)
 
 if __name__ == '__main__':
-
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
     app.run(debug=True)
+
