@@ -5,6 +5,7 @@ class PersonSearchForm(Form):
 	# (value, label)
     choices = [('All', 'All'),
        		   ('Director', 'Director'),
+       		   ('Technical Director', 'Technical Director'),
                ('Actor', 'Actor'),
                ('Cameraman', 'Cameraman'),
                ('Editor', 'Editor'),
