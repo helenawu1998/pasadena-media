@@ -33,7 +33,7 @@ class Profile(db.Model):
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
-    course_name = db.Column(db.String(255))
+    course_name = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
         return '<Course {}, ID: {}>'.format(self.course_name, self.id)
@@ -41,7 +41,7 @@ class Course(db.Model):
 class Position(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
-    position_name = db.Column(db.String(255))
+    position_name = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
         return '<Position {}, ID: {}>'.format(self.position_name, self.id)
@@ -49,7 +49,7 @@ class Position(db.Model):
 class Production(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
-    production_name = db.Column(db.String(255))
+    production_name = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        return '<Production {}, ID: {}>'.format(self.course_name, self.id)
+        return '<Production {}, ID: {}>'.format(self.production_name, self.id)
