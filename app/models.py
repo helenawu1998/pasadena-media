@@ -21,11 +21,12 @@ class Profile(db.Model):
     preferred_name = db.Column(db.String(255))
     contact_email = db.Column(db.String(255), index=True)
     phone = db.Column(db.String(64))
-    notes = db.Column(db.Text) 
+    notes = db.Column(db.Text)
     profile_picture = db.Column(db.String(255))
     courses = db.relationship('Course', backref='profile')
     positions = db.relationship('Position', backref='profile')
-    
+    productions = db.relationship('Production', backref='profile')
+
     def __repr__(self):
         return '<Profile ID: {}, User ID: {}>'.format(self.id, self.user_id)
 
@@ -33,15 +34,22 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
     course_name = db.Column(db.String(255))
-    
+
     def __repr__(self):
         return '<Course {}, ID: {}>'.format(self.course_name, self.id)
-    
+
 class Position(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
     position_name = db.Column(db.String(255))
-    
+
     def __repr__(self):
         return '<Position {}, ID: {}>'.format(self.position_name, self.id)
-  
+
+class Production(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
+    production_name = db.Column(db.String(255))
+
+    def __repr__(self):
+        return '<Production {}, ID: {}>'.format(self.course_name, self.id)
