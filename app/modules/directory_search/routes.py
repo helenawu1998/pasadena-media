@@ -2,6 +2,7 @@ import mimetypes
 from app import app
 from app.modules.directory_search.forms import PersonSearchForm
 from app.modules.directory_search import blueprint, helpers
+from app.models import Profile, Course, Position, Production
 from flask import flash, render_template, request, redirect, url_for
 # from [database] import database class
 
@@ -19,19 +20,19 @@ def index():
 @blueprint.route('/directory_search/results')
 def search_results(search):
     results = []
-    search_string = search.data['name']
+    first_name = search.data['first_name']
+    last_name = search.data['last_name']
 
     # Somehow search for the name
-    print()
     if search.data['select'] == 'All':
         # Re-search if both fields are empty
-        if search.data['name'] == '':
+        if first_name == '' and last_name == '':
             flash('Please specify either a name or a role')
             return redirect(url_for('directory_search.index'))
         # TODO: Query all searches with the name
     else:
         role = search.data['select']
-        if search.data['name'] == '':
+        if search.data['first_name'] == '':
             # TODO: Query all searches of the role
             '''
             qry = db_session.query() # Database query class name

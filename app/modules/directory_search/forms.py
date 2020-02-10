@@ -11,4 +11,5 @@ class PersonSearchForm(Form):
                ('Editor', 'Editor'),
                ('Musician', 'Musician')]
     select = SelectField('Search for role:', choices=choices)
-    name = StringField('Name')
+    first_name = StringField('First Name')
+    last_name = StringField('Last Name')
