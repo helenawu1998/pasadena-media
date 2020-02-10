@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+{% endblock %}
+{% block page %}
+  <h1>Register for Pasadena Media Directory Service</h1>
+  <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+          {{ form.username.label }}<br>
+          {{ form.username(size=32) }}
+      </p>
+      <p>
+          {{ form.first_name.label }}<br>
+          {{ form.first_name(size=32) }}
+      </p>
+      <p>
+          {{ form.last_name.label }}<br>
+          {{ form.last_name(size=32) }}
+      </p>
+      <p>
+          {{ form.password.label }}<br>
+          {{ form.password(size=32) }}
+      </p>
+      <p>
+          {{ form.password2.label }}<br>
+          {{ form.password2(size=32) }}
+      </p>
+      <p>{{ form.submit() }}</p>
+  </form>
+{% endblock %}
