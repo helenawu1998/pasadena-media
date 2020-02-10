@@ -21,9 +21,25 @@ def search_results(search):
     search_string = search.data['name']
 
     # Somehow search for the name
-    if search.data['name'] == '':
-        qry = db_session.query() # Database query class name
-        results = qry.all()
+    print()
+    if search.data['select'] == 'All':
+        # Re-search if both fields are empty
+        if search.data['name'] == '':
+            flash('Please specify either a name or a role')
+            return redirect(url_for('directory_search.index'))
+        # TODO: Query all searches with the name
+    else:
+        role = search.data['select']
+        if search.data['name'] == '':
+            # TODO: Query all searches of the role
+            '''
+            qry = db_session.query() # Database query class name
+            results = qry.all()
+            '''
+            pass
+        else:
+            # TODO: Query search of role and name
+            pass
 
     # If there are no results
     if not results:
@@ -37,4 +53,3 @@ if __name__ == '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
     app.run(debug=True)
-
