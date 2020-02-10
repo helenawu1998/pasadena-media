@@ -229,7 +229,9 @@ function newElement(input_name, list_name) {
 <form method=post>
   <dl>
     <p>
-    {{ render_field(form.name) }}
+    {{ render_field(form.first_name) }}
+    <p>
+    {{ render_field(form.last_name) }}
   </dl>
   <p><input type=submit value=Search>
 </form>

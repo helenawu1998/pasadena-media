@@ -4,11 +4,14 @@ from wtforms import Form, StringField, SelectField
 class PersonSearchForm(Form):
     
 	# (value, label)
-    choices = [('Director', 'Director'),
+    choices = [('All', 'All'),
+       		   ('Director', 'Director'),
+       		   ('Technical Director', 'Technical Director'),
                ('Actor', 'Actor'),
                ('Cameraman', 'Cameraman'),
                ('Editor', 'Editor'),
                ('Musician', 'Musician'),
                ('Any', 'Any')]
     select = SelectField('Search for role:', choices=choices)
-    name = StringField('Name')
+    first_name = StringField('First Name')
+    last_name = StringField('Last Name')
