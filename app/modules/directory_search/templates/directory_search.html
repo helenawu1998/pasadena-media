@@ -148,18 +148,44 @@ input {
 
 <div id="myDIV" class="header">
   <h2 style="margin:10px">Directory Search</h2>
-  <input type="text" id="myInput" placeholder="Role/Occupation">
-  <span onclick="newElement()" class="addBtn">Add</span>
+  <input type="text" id="rolesInput" placeholder="Role/Occupation">
+  <span onclick="newElement('rolesInput', 'rolesUL')" class="addBtn">Add</span>
+  <input type="text" id="classesInput" placeholder="Classes">
+  <span onclick="newElement('classesInput', 'classesUL')" class="addBtn">Add</span>
 </div>
 
 
-<ul id="myUL" class = "search_attributes">
+<ul id="rolesUL" class = "search_attributes" style="margin:20px">
 
 </ul>
 
+<ul id="classesUL" class = "search_attributes" style = "margin:20px">
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
 <script>
+  // JAVASCRIPT HERE
 // Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("myUL");
+var myNodelist = document.getElementsByTagName("rolesUL");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+var myNodelist = document.getElementsByTagName("classesUL");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
   var span = document.createElement("SPAN");
@@ -180,17 +206,18 @@ for (i = 0; i < close.length; i++) {
 }
 
 // Create a new list item when clicking on the "Add" button
-function newElement() {
+function newElement(input_name, list_name) {
+  console.log(input_name, list_name)
   var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
+  var inputValue = document.getElementById(input_name).value;
   var t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue === '') {
     alert("You must write something!");
   } else {
-    document.getElementById("myUL").appendChild(li);
+    document.getElementById(list_name).appendChild(li);
   }
-  document.getElementById("myInput").value = "";
+  document.getElementById(input_name).value = "";
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
@@ -209,6 +236,11 @@ function newElement() {
 
 </body>
 </html>
+
+
+
+
+
 
 
 
