@@ -2,7 +2,7 @@ import mimetypes
 from app import app
 from app.modules.directory_search.forms import PersonSearchForm
 from app.modules.directory_search import blueprint, helpers
-from app.models import Profile, Course, Position, Production
+# from app.models import Profile, Course, Position, Production
 from flask import flash, render_template, request, redirect, url_for
 # from [database] import database class
 
