@@ -1,6 +1,6 @@
 from flask import request, render_template, make_response
 from flask import current_app as app
-from .models import db, User, Profile
+from app.models import db, User, Profile
 from app.modules.profile import blueprint
 
 @blueprint.route("/profile")
