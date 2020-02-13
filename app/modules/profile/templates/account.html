@@ -7,16 +7,16 @@
 <!-- uses donut as inspo -->
 <title>User Profile Page</title>
 	<div class='container theme-showcase jumbotron' style='float: none; padding-bottom: 25px'>
-		<h3 align="center"> John Smith </h3>	
+		<h3 align="center"> {{profile.first_name}} {{profile.last_name}} </h3>
 	<table>
 		<tr>
 			<th>Name:</th>
-			<td>John Smith</td>
+			<td>{{profile.first_name}} {{profile.last_name}}</td>
 			<td>Preferred name: <input type="text" name="prefname"></td>
 		</tr>
 		<tr>
 			<th>Registered email:</th>
-			<td>johnsmith24@gmail.com </td>
+			<td>{{user.email}} </td>
 		</tr>
 		<tr>
 			<th>Contact email:</th>
@@ -38,7 +38,7 @@
 				<table>
 					<tr><td>Introduction to Video Editing</tr></td>
 				</table>
-			
+
 			</td>
 		</tr>
 		<tr>

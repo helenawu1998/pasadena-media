@@ -1,20 +1,23 @@
-from flask import request, render_template, make_response
+from flask import request, render_template, make_response, redirect
 from flask import current_app as app
 from app.models import db, User, Profile, Course, Position, Production
 from app.modules.profile import blueprint
+from flask_login import current_user
 
 @blueprint.route("/profile")
 def show_profile():
-    # need to check login authorization
     #user, profile = get_user()
     #return render_template("profile.html", user=user, profile=profile)
     return render_template("profile.html")
 @blueprint.route("/account")
 def show_account():
-    # need if not logged in, makes you login
+    if current_user.is_authenticated:
+        if current_user.profile:
+            profile = current_user.profile[0]
+        return render_template("account.html", user=current_user, profile=profile)
+    return redirect(url_for('login.login'))
     #user, profile = get_user()
-    #return render_template("account.html", user=user, profile=profile)
-    return render_template("account.html")
+
 '''def get_user():
     # Get a user's information.
     email = request.args.get('email')
