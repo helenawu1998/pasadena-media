@@ -9,25 +9,27 @@
 	<table>
 		<tr>
 			<th>Name:</th>
-			<td>John Smith<td>
+			<td>{{user.first_name}} {{user.last_name}}<td>
 		</tr>
 		<tr>
 			<th>Contact email:</th>
-			<td>johnsmith07@gmail.com</td>
+			<td>{{profile.contact_email}}</td>
 		</tr>
 		<tr>
 			<th>Contact phone:</th>
-			<td>626-395-5739</td>
+			<td>{{profile.phone}}</td>
 		</tr>
 		<tr>
 			<th>Position:</th>
-			<td>Cameraman</td>
+			<td>{{profile.positions}}</td>
 		</tr>
 		<tr>
 			<th>Classes:</th>
+			<td>{{profile.classes}}</td>
 		</tr>
 		<tr>
 			<th>Profile description:</th>
+			<td>{{profile.notes}}</td>
 		</tr>
 	</table>
 	</div>
