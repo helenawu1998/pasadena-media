@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+{% endblock %}
+{% block page %}
+
+<!-- uses donut as inspo -->
+<title>User Profile Page</title>
+	<div class='container theme-showcase jumbotron' style='float: none; padding-bottom: 25px'>
+		<h3 align="center"> {{user.first_name}} {{user.last_name}} </h3>	
+	<table>
+		<tr>
+			<th>Name:</th>
+			<td>{{user.first_name}} {{user.lasta_name}}</td>
+			<td>Preferred name: <input type="text" name="prefname" value={{profile.preferred_name}}></td>
+		</tr>
+		<tr>
+			<th>Registered email:</th>
+			<td>{{user.email}}</td>
+		</tr>
+		<tr>
+			<th>Contact email:</th>
+			<td><input type="text" name="contactemail" value={{profile.contact_email}}></td>
+		</tr>
+		<tr>
+			<th>Contact phone: </th>
+			<td><input type="text" name="phone" value={{profile.phone}}></td>
+		</tr>
+		<tr>
+			<!-- TO DO: MAKE EDITABLE -->
+			<th>Position(s):</th>
+			<td>{{profile.positions}}</td>
+		</tr>
+		<tr>
+			<!-- TO DO: MAKE EDITABLE -->
+			<th>Classes:</th>
+			<td>
+				<table>
+					<tr><td>{{profile.classes}}</tr></td>
+				</table>
+			
+			</td>
+		</tr>
+		<tr>
+			<th>Profile description:</th>
+		</tr>
+	</table>
+	<textarea rows="7" cols="50" value={{profile.notes}}></textarea><br>
+	<input type="submit" value="Submit changes">
+	</div>
+
+
+{% endblock %}

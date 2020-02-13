@@ -1,4 +1,3 @@
-  
 {% extends "base.html" %}
 {% block styles %}
 {{ super() }}
@@ -10,23 +9,27 @@
 	<table>
 		<tr>
 			<th>Name:</th>
-			<td>John Smith<td>
+			<td>{{user.first_name}} {{user.last_name}}<td>
 		</tr>
 		<tr>
-			<th>Username:&nbsp&nbsp&nbsp</th>
-			<td>johnsmith07</td>
+			<th>Contact email:</th>
+			<td>{{profile.contact_email}}</td>
+		</tr>
+		<tr>
+			<th>Contact phone:</th>
+			<td>{{profile.phone}}</td>
 		</tr>
 		<tr>
 			<th>Position:</th>
-			<td>Director</td>
+			<td>{{profile.positions}}</td>
 		</tr>
 		<tr>
-			<th>Email:</th>
-			<td>johnsmith@gmail.com</td>
+			<th>Classes:</th>
+			<td>{{profile.classes}}</td>
 		</tr>
 		<tr>
-			<th>Phone:</th>
-			<td>420-42-4204</td>
+			<th>Profile description:</th>
+			<td>{{profile.notes}}</td>
 		</tr>
 	</table>
 	</div>
