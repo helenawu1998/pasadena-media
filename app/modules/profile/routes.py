@@ -1,6 +1,6 @@
 from flask import request, render_template, make_response
 from flask import current_app as app
-from app.models import db, User, Profile
+from app.models import db, User, Profile, Course, Position, Production
 from app.modules.profile import blueprint
 
 @blueprint.route("/profile")
@@ -13,7 +13,7 @@ def show_account():
     # need if not logged in, makes you login
     user, profile = get_user()
     return render_template("account.html", user=user, profile=profile)
-@app.route('/', methods=['GET'])
+@blueprint.route('/', methods=['GET'])
 def get_user():
     ''' Get a user's information. '''
     email = request.args.get('email')
