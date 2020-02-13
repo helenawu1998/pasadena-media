@@ -10,8 +10,8 @@
       <nav>
         <ul class="nav nav-pills pull-right">
           <li role="presentation" class="active"><a href="{{ url_for('index') }}">Home</a></li>
-          <li role="presentation" class="active"><a href="{{ url_for('index') }}">Some Link</a></li>
-	  <li role="presentation" class="active"><a href="{{ url_for('profile.show_profile') }}">Profile</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('directory_search.index') }}">Directory</a></li>
+	  <!-- <li role="presentation" class="active"><a href="{{ url_for('profile.show_profile') }}">Profile</a></li> -->
 	  <li role="presentation" class="active"><a href="{{ url_for('profile.show_account') }}">Account</a></li>
       {% if current_user.is_anonymous %}
         <li role="presentation" class="active"><a href="{{ url_for('login.login') }}">Login</a></li>

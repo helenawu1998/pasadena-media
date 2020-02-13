@@ -10,6 +10,8 @@ from flask_login import current_user, login_user, logout_user
 @blueprint.route("/login", methods=['GET', 'POST'])
 def login():
     # Check login authorization
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.username.data).first()
