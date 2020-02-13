@@ -13,6 +13,11 @@
           <li role="presentation" class="active"><a href="{{ url_for('index') }}">Some Link</a></li>
 	  <li role="presentation" class="active"><a href="{{ url_for('profile.show_profile') }}">Profile</a></li>
 	  <li role="presentation" class="active"><a href="{{ url_for('profile.show_account') }}">Account</a></li>
+      {% if current_user.is_anonymous %}
+        <li role="presentation" class="active"><a href="{{ url_for('login.login') }}">Login</a></li>
+      {% else %}
+        <li role="presentation" class="active"><a href="{{ url_for('login.logout') }}">Logout</a></li>
+      {% endif %}
         </ul>
       </nav>
       <h3 class="text-muted">Welcome to Pasadena Media Directory</h3>
