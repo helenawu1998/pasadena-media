@@ -13,7 +13,6 @@ def show_account():
     # need if not logged in, makes you login
     user, profile = get_user()
     return render_template("account.html", user=user, profile=profile)
-@blueprint.route('/', methods=['GET'])
 def get_user():
     ''' Get a user's information. '''
     email = request.args.get('email')
