@@ -4,12 +4,8 @@
 {{ super() }}
 {% endblock %}
 
-<!-- Unsure where to put the header
-	<head>
-		<title>Person Search Database</title>
-	</head>
--->
 {% block page %}
+
 <!-- Ok, so I'm using a search bar example from online lmao -->
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -21,12 +17,221 @@
   {% endif %}
 {% endwith %}
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  min-width: 250px;
+}
+
+/* Include the padding and border in an element's total width and height */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove margins and padding from the list */
+ul.search_attributes {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+ul.search_attributes li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul.search_attributes li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+ul.search_attributes li:hover {
+  background: #ddd;
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Style the header */
+.directory_header {
+  background-color: #bbbbaa;
+  padding: 30px 40px;
+  color: black;
+  text-align: center;
+}
+
+/* Clear floats after the header */
+.directory_header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+input {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+</style>
+</head>
+<body>
+
+<div id="myDIV" class="directory_header">
+  <h2 style="margin:10px">Directory Search</h2>
+  <input type="text" id="rolesInput" placeholder="Role/Occupation">
+  <span onclick="newElement('rolesInput', 'rolesUL')" class="addBtn">Add</span>
+  <input type="text" id="classesInput" placeholder="Classes">
+  <span onclick="newElement('classesInput', 'classesUL')" class="addBtn">Add</span>
+</div>
+
+
+<ul id="rolesUL" class = "search_attributes" style="margin:20px">
+
+</ul>
+
+<ul id="classesUL" class = "search_attributes" style = "margin:20px">
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  // JAVASCRIPT HERE
+// Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByTagName("rolesUL");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+var myNodelist = document.getElementsByTagName("classesUL");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Create a new list item when clicking on the "Add" button
+function newElement(input_name, list_name) {
+  console.log(input_name, list_name)
+  var li = document.createElement("li");
+  var inputValue = document.getElementById(input_name).value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById(list_name).appendChild(li);
+  }
+  document.getElementById(input_name).value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
 {% from "_formhelpers.html" import render_field %}
 <form method=post>
   <dl>
-    {{ render_field(form.select) }}
     <p>
-    {{ render_field(form.name) }}
+    {{ render_field(form.first_name) }}
+    <p>
+    {{ render_field(form.last_name) }}
   </dl>
   <p><input type=submit value=Search>
 </form>
