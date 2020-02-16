@@ -7,47 +7,66 @@
 <!-- uses donut as inspo -->
 <title>User Profile Page</title>
 	<div class='container theme-showcase jumbotron' style='float: none; padding-bottom: 25px'>
-		<h3 align="center"> {{profile.first_name}} {{profile.last_name}} </h3>
-	<table>
-		<tr>
-			<th>Name:</th>
-			<td>{{profile.first_name}} {{profile.last_name}}</td>
-			<td>Preferred name: <input type="text" name="prefname"></td>
-		</tr>
-		<tr>
-			<th>Registered email:</th>
-			<td>{{user.email}} </td>
-		</tr>
-		<tr>
-			<th>Contact email:</th>
-			<td><input type="text" name="contactemail"></td>
-		</tr>
-		<tr>
-			<th>Contact phone: </th>
-			<td><input type="text" name="phone"></td>
-		</tr>
-		<tr>
-			<!-- TO DO: MAKE EDITABLE -->
-			<th>Position(s):</th>
-			<td>Director </td>
-		</tr>
-		<tr>
-			<!-- TO DO: MAKE EDITABLE -->
-			<th>Classes:</th>
-			<td>
-				<table>
-					<tr><td>Introduction to Video Editing</tr></td>
-				</table>
+        <form action="" method="post" novalidate>
+    		<h2 align="center"> {{profile.first_name}} {{profile.last_name}} </h2>
+    	    <table>
+    		<tr>
+    			<th>Name:</th>
+    			<td>{{profile.first_name}} {{profile.last_name}}</td>
+                <td>Preferred Name: <input type="text" name="prefname"
+                    {% if profile.preferred_name %}
+                    placeholder={{profile.preferred_name}} {% endif %}></td>
+    		</tr>
+            <tr>
+                <th>Registered email:</th>
+                <td>{{user.email}} </td>
+            </tr>
+    		<tr>
+    			<th>{{form.edit_contact_email.label}}</th>
+                {% if profile.contact_email %}
+                {% set contact_email = profile.contact_email %}
+                    <td>{{ form.edit_contact_email(placeholder=contact_email, size=32) }}</td>
+                {% else %}
+                    <td>{{ form.edit_contact_email(size=32) }}</td>
+                {% endif %}
+    		</tr>
+    		<tr>
+                <th>{{form.edit_phone.label}}</th>
+                {% if profile.phone %}
+                {% set phone = profile.phone %}
+                    <td>{{ form.edit_phone(placeholder=phone, size=32) }}</td>
+                {% else %}
+                    <td>{{ form.edit_phone(size=32) }}</td>
+                {% endif %}
+    		</tr>
+    		<tr>
+    			<!-- TO DO: MAKE EDITABLE -->
+    			<th>Position(s):</th>
+    			<td>Director </td>
+    		</tr>
+    		<tr>
+    			<!-- TO DO: MAKE EDITABLE -->
+    			<th>Classes:</th>
+    			<td>
+    				<table>
+    					<tr><td>Introduction to Video Editing</td></tr>
+    				</table>
 
-			</td>
-		</tr>
-		<tr>
-			<th>Profile description:</th>
-		</tr>
-	</table>
-	<textarea rows="7" cols="50"></textarea><br>
-	<input type="submit" value="Submit changes">
-	</div>
+    			</td>
+    		</tr>
+            <tr>
+                <th>{{form.edit_notes.label}}</th>
+            </tr>
+    	</table>
+            {% if profile.notes %}
+            {% set note = profile.notes %}
+                <td>{{ form.edit_notes(placeholder=note, rows="7", cols="50") }}</td>
+            {% else %}
+                <td>{{ form.edit_notes(rows="7", cols="50") }}</td>
+            {% endif %} <br>
+            {{ form.submit() }}
+    	</form>
+    </div>
 
 
 {% endblock %}
