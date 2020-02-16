@@ -38,7 +38,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        profile = Profile(user_id = user.id, contact_email=form.username.data,
+        profile = Profile(user_id = user.id,
             first_name = form.first_name.data, last_name = form.last_name.data)
         db.session.add(profile)
         db.session.commit()
