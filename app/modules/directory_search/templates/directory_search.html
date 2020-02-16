@@ -208,6 +208,15 @@ function newElement(input_name, list_name) {
     close[i].onclick = function() {
       var div = this.parentElement;
       div.style.display = "none";
+      alert(i)
+      $.ajax({
+          type: "POST",
+          contentType: "application/json;charset=utf-8",
+          url: "/your/flask/endpoint",
+          traditional: "true",
+          data: JSON.stringify({names}),
+          dataType: "json"
+          });
     }
   }
 }
