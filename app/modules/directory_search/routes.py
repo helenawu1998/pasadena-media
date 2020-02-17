@@ -115,7 +115,7 @@ def search_results(search):
         return redirect(url_for('directory_search.index'))
 
     # Either view the user
-    if len(users) == 1:
+    if users.count() == 1:
         return render_template('view_user.html') #, user_id=results[0].get_id())
     else:
         return render_template('results.html', results=users)

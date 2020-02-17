@@ -1,10 +1,10 @@
-{% extends 'layout.html' %}
+{% extends 'base.html' %}
 {% block page %}
 	<div class='profile_results' style='float: none; padding-bottom: 25px'>
 		<button class='btn' onclick='history.back()'>
 			&lt; Back
 		</button>
-		<div>Your search returned {{ results|length or 'no' }} results</div>
+		<div>Your search returned {{ results.count() or 'no' }} results</div>
 		{% if results %}
 			<table class='table table-striped table-condensed'>
 				<thead>
