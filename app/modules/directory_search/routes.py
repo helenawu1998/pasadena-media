@@ -36,23 +36,23 @@ def search_results(search):
                         .filter(Position.production_name == roles).all()
         elif first_name == '':
             # Query last name
-            users = db.session.query(User, Course, Position)\
+            users = db.session.query(Profile, Course, Position)\
                         .filter(Course.course_name == classes)\
                         .filter(Position.production_name == roles)\
-                        .filter(User.last_name == last_name).all()
+                        .filter(Profile.last_name == last_name).all()
         elif last_name == '':
             # Query first name
-            users = db.session.query(User, Course, Position)\
+            users = db.session.query(Profile, Course, Position)\
                         .filter(Course.course_name == classes)\
                         .filter(Position.production_name == roles)\
-                        .filter(User.first_name == first_name).all()
+                        .filter(Profile.first_name == first_name).all()
         else:
             # Query both names
-            users = db.session.query(User, Course, Position)\
+            users = db.session.query(Profile, Course, Position)\
                         .filter(Course.course_name == classes)\
                         .filter(Position.production_name == roles)\
-                        .filter(User.first_name == first>name)\
-                        .filter(User.last_name == last_name).all()
+                        .filter(Profile.first_name == first>name)\
+                        .filter(Profile.last_name == last_name).all()
     elif len(classes):
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
@@ -60,20 +60,20 @@ def search_results(search):
                         .filter(Course.course_name == classes).all()
         elif first_name == '':
             # Query last name
-            users = db.session.query(User, Course)\
+            users = db.session.query(Profile, Course)\
                         .filter(Course.course_name == classes)\
-                        .filter(User.last_name == last_name).all()
+                        .filter(Profile.last_name == last_name).all()
         elif last_name == '':
             # Query first name
-            users = db.session.query(User, Course)\
+            users = db.session.query(Profile, Course)\
                         .filter(Course.course_name == classes)\
-                        .filter(User.first_name == first_name).all()
+                        .filter(Profile.first_name == first_name).all()
         else:
             # Query both names
-            users = db.session.query(User, Course)\
+            users = db.session.query(Profile, Course)\
                         .filter(Course.course_name == classes)\
-                        .filter(User.first_name == first>name)\
-                        .filter(User.last_name == last_name).all()
+                        .filter(Profile.first_name == first>name)\
+                        .filter(Profile.last_name == last_name).all()
     elif len(roles):
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
@@ -81,33 +81,33 @@ def search_results(search):
                         .filter(Position.production_name == roles).all()
         elif first_name == '':
             # Query last name
-            users = db.session.query(User, Position)\
+            users = db.session.query(Profile, Position)\
                         .filter(Position.production_name == roles)\
-                        .filter(User.last_name == last_name).all()
+                        .filter(Profile.last_name == last_name).all()
         elif last_name == '':
             # Query first name
-            users = db.session.query(User, Position)\
+            users = db.session.query(Profile, Position)\
                         .filter(Position.production_name == roles)\
-                        .filter(User.first_name == first_name).all()
+                        .filter(Profile.first_name == first_name).all()
         else:
             # Query both names
-            users = db.session.query(User, Position)\
+            users = db.session.query(Profile, Position)\
                         .filter(Position.production_name == roles)\
-                        .filter(User.first_name == first>name)\
-                        .filter(User.last_name == last_name).all()
+                        .filter(Profile.first_name == first>name)\
+                        .filter(Profile.last_name == last_name).all()
     else:
         if first_name == '' and last_name == '':
             flash('Please specify either a name or a role')
             return redirect(url_for('directory_search.index'))
         elif first_name == '':
-            users = db.session.query(User).filter(User.last_name == last_name).all()
+            users = db.session.query(Profile).filter(Profile.last_name == last_name).all()
         elif last_name == '':
-            users = db.session.query(User).filter(User.first_name == first_name).all()
+            users = db.session.query(Profile).filter(Profile.first_name == first_name).all()
         else:
             # TODO: Query search of role and name
-            users = db.session.query(User)\
-                            .filter(User.first_name == first_name)\
-                            .filter(User.last_name == last_name)
+            users = db.session.query(Profile)\
+                            .filter(Profile.first_name == first_name)\
+                            .filter(Profile.last_name == last_name)
 
     # If there are no results
     if not users:
