@@ -21,7 +21,6 @@ def index():
 
 @blueprint.route('/directory_search/results')
 def search_results(search):
-    results = []
     first_name = search.data['first_name']
     last_name = search.data['last_name']
     classes = search.data['classes']
@@ -104,11 +103,6 @@ def search_results(search):
             users = Session.query(User).filter(User.last_name == last_name).all()
         elif last_name == '':
             users = Session.query(User).filter(User.first_name == first_name).all()
-            # TODO: Query all searches of the role
-            '''
-            qry = db_session.query() # Database query class name
-            results = qry.all()
-            '''
         else:
             # TODO: Query search of role and name
             users = Session.query(User)\
@@ -116,15 +110,15 @@ def search_results(search):
                             .filter(User.last_name == last_name)
 
     # If there are no results
-    if not results:
+    if not users:
         flash('No results found!')
         return redirect(url_for('directory_search.index'))
 
     # Either view the user
-    if len(results) == 1:
+    if len(users) == 1:
         return render_template('view_user.html') #, user_id=results[0].get_id())
     else:
-        return render_template('results.html', results=results)
+        return render_template('results.html', results=users)
 
 
 @blueprint.route('/directory_search/users/<int:user_id>')
