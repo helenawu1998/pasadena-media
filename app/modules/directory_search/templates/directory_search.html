@@ -149,9 +149,9 @@ input {
 <div id="myDIV" class="directory_header">
   <h2 style="margin:10px">Directory Search</h2>
   <input type="text" id="rolesInput" placeholder="Role/Occupation">
-  <span onclick="newElement('rolesInput', 'rolesUL'); loadFilter('rolesUL');" class="addBtn">Add</span>
+  <span onclick="newElement('rolesInput', 'rolesUL')" class="addBtn">Add</span>
   <input type="text" id="classesInput" placeholder="Classes">
-  <span onclick="newElement('classesInput', 'classesUL'); loadFilter('classesUL');" class="addBtn">Add</span>
+  <span onclick="newElement('classesInput', 'classesUL')" class="addBtn">Add</span>
 </div>
 
 
@@ -245,6 +245,12 @@ function loadFilter(list_name) {
         filtered.push(child.slice(0,-1)); // Get everything but last character
     }
     alert(filtered)
+    var fs = require('fs');
+    fs.writeFile(file_name + '.txt', filtered, function (err) {
+      if (err) throw err;
+      console.log('Saved!');
+    });
+    alert("HEY");
     return filtered;
 }
 
@@ -272,6 +278,6 @@ function loadFilter(list_name) {
     {{ render_field(form.last_name) }}
   </dl>
   <br><br>
-  <input class = searchButton type=submit value=Search>
+  <input onclick = "loadFilter('rolesUL'); loadFilter('classesUL');" class = searchButton type=submit value=Search>
 </form>
 {% endblock %}
