@@ -1,5 +1,15 @@
 from wtforms import Form, StringField, SelectField
+from flask import request, jsonify, render_template
+import sys
 # from app.modules.directory_search.templates.directory_search import loadFilter
+def classes_and_roles():
+    if request.method == "POST":
+        data = []
+        data['title'] = request.json['title']
+        print(data, file=sys.stderr)
+        return jsonify(data)
+    else:
+        return render_template('directory_search.html')
 
 # Credit to http://www.blog.pythonlibrary.org/2017/12/13/flask-101-how-to-add-a-search-form/
 class PersonSearchForm(Form):
@@ -19,4 +29,3 @@ class PersonSearchForm(Form):
   last_name = StringField('Last Name')
   roles = StringField('hi')
   classes = StringField('Oh no')
-  
