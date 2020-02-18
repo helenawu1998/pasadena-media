@@ -120,10 +120,10 @@ def search_results(search):
         return redirect(url_for('directory_search.index'))
 
     # Either view the user
-    if users.count() == 1:
-        return render_template('view_user.html', results=users) #, user_id=results[0].get_id())
-    else:
-        return render_template('results.html', results=users)
+    # if users.count() == 1:
+        # return render_template('view_user.html', results=users) #, user_id=results[0].get_id())
+    # else:
+    return render_template('results.html', results=users)
 
 
 @blueprint.route('/directory_search/users/<int:user_id>')
