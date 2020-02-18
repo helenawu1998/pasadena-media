@@ -1,4 +1,3 @@
-import mimetypes
 from app import app
 from app.modules.directory_search.forms import PersonSearchForm
 from app.modules.directory_search import blueprint, helpers
@@ -29,10 +28,10 @@ def search_results(search):
     # flash(type(db.session.query(Profile).filter(Profile.first_name == first_name)))
     # Somehow search for the name
     flash(search.data)
-    users = db.session.query(Profile, Course, Position)
     if len(classes) and len(roles):
-        classes = classes.split(',')[0]
-        roles = roles.split(',')[0]
+        users = db.session.query(Profile).join(Course).join(Position)
+        classes = classes.split(',')
+        roles = roles.split(',')
         for c in classes:
             users = users.filter(Course.course_name == c)
         for r in roles:
@@ -52,8 +51,8 @@ def search_results(search):
             users = users.filter(Profile.first_name == first_name)\
                         .filter(Profile.last_name == last_name)
     elif len(classes):
-        classes = classes.split(',')[0]
-        users = db.session.query(Profile, Course)
+        users = db.session.query(Profile).join(Course)
+        classes = classes.split(',')
         for c in classes:
             users = users.filter(Course.course_name == c)
         if first_name == '' and last_name == '':
@@ -71,7 +70,8 @@ def search_results(search):
             users = users.filter(Profile.first_name == first_name)\
                         .filter(Profile.last_name == last_name)
     elif len(roles):
-        roles = roles.split(',')[0]
+        users = db.session.query(Profile).join(Position)
+        roles = roles.split(',')
         for r in roles:
             users = users.filter(Position.position_name == r)
         if first_name == '' and last_name == '':
@@ -89,6 +89,7 @@ def search_results(search):
             users = users.filter(Profile.first_name == first_name)\
                         .filter(Profile.last_name == last_name)
     else:
+        users = db.session.query(Profile)
         if first_name == '' and last_name == '':
             flash('Please specify either a name or a role')
             return redirect(url_for('directory_search.index'))
@@ -98,8 +99,11 @@ def search_results(search):
             users = users.filter(Profile.first_name == first_name)
         else:
             # TODO: Query search of role and name
-            users = users.filter(Profile.first_name == first_name)\
-                        .filter(Profile.last_name == last_name)
+            flash(type(first_name))
+            flash(last_name)
+            flash(users)
+            users = users.filter(Profile.first_name=='e')\
+                        .filter(Profile.last_name=='e')
 
     # If there are no results
     if not users:
@@ -113,7 +117,7 @@ def search_results(search):
     users = users.all()
     return render_template('results.html', results=users)
 
-
+'''
 @blueprint.route('/directory_search/users/<int:user_id>')
 def view_user(user_id):
     user = helpers.get_user(user_id)
@@ -133,3 +137,4 @@ if __name__ == '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
     app.run(debug=True)
+'''
