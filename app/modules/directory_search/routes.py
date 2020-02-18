@@ -54,7 +54,7 @@ def search_results(search):
             users = db.session.query(Profile, Course, Position)\
                         .filter(Course.course_name == classes)\
                         .filter(Position.position_name == roles)\
-                        .filter(Profile.first_name == first>name)\
+                        .filter(Profile.first_name == first_name)\
                         .filter(Profile.last_name == last_name).all()
     elif len(classes):
         classes = classes.split(',')[0]
@@ -76,7 +76,7 @@ def search_results(search):
             # Query both names
             users = db.session.query(Profile, Course)\
                         .filter(Course.course_name == classes)\
-                        .filter(Profile.first_name == first>name)\
+                        .filter(Profile.first_name == first_name)\
                         .filter(Profile.last_name == last_name).all()
     elif len(roles):
         roles = roles.split(',')[0]
@@ -98,7 +98,7 @@ def search_results(search):
             # Query both names
             users = db.session.query(Profile, Position)\
                         .filter(Position.position_name == roles)\
-                        .filter(Profile.first_name == first>name)\
+                        .filter(Profile.first_name == first_name)\
                         .filter(Profile.last_name == last_name).all()
     else:
         if first_name == '' and last_name == '':
