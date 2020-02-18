@@ -111,7 +111,6 @@ def search_results(search):
         # return render_template('view_user.html', results=users) #, user_id=results[0].get_id())
     # else:
     users = users.all()
-    flash(users)
     return render_template('results.html', results=users)
 
 
