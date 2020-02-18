@@ -21,9 +21,13 @@
 						<tr>
 							<td>
 								<a href='{{ url_for("directory_search.view_user", user_id=user["user_id"]) }}'>
-									{{ user['full_name'] }}
+									{{ user['first_name'] }}
 								</a>
 							</td>
+							<td>
+								{{ user['last_name'] }}
+							</td>
+							<!--
 							<td>{{ user['graduation_year'] or '' }}</td>
 							{% if show_images %}
 								<td>
@@ -35,6 +39,7 @@
 									{% endif %}
 								</td>
 							{% endif %}
+							-->
 						</tr>
 					{% endfor %}
 				</tbody>

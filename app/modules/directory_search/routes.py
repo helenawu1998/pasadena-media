@@ -32,6 +32,7 @@ def search_results(search):
     if len(classes) and len(roles):
         classes = classes.split(',')[0]
         roles = roles.split(',')[0]
+        users = db.session.query(Profile, Course, Position)
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
             users = db.session.query(Course, Position)\
