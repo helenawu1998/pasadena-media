@@ -26,34 +26,38 @@ def search_results(search):
     classes = search.data['classes']
     roles = search.data['roles']
 
+    # flash(type(db.session.query(Profile).filter(Profile.first_name == first_name)))
     # Somehow search for the name
     flash(search.data)
     if len(classes) and len(roles):
+        classes = classes.split(',')[0]
+        roles = roles.split(',')[0]
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
             users = db.session.query(Course, Position)\
                         .filter(Course.course_name == classes)\
-                        .filter(Position.production_name == roles).all()
+                        .filter(Position.position_name == roles).all()
         elif first_name == '':
             # Query last name
             users = db.session.query(Profile, Course, Position)\
                         .filter(Course.course_name == classes)\
-                        .filter(Position.production_name == roles)\
+                        .filter(Position.position_name == roles)\
                         .filter(Profile.last_name == last_name).all()
         elif last_name == '':
             # Query first name
             users = db.session.query(Profile, Course, Position)\
                         .filter(Course.course_name == classes)\
-                        .filter(Position.production_name == roles)\
+                        .filter(Position.position_name == roles)\
                         .filter(Profile.first_name == first_name).all()
         else:
             # Query both names
             users = db.session.query(Profile, Course, Position)\
                         .filter(Course.course_name == classes)\
-                        .filter(Position.production_name == roles)\
+                        .filter(Position.position_name == roles)\
                         .filter(Profile.first_name == first>name)\
                         .filter(Profile.last_name == last_name).all()
     elif len(classes):
+        classes = classes.split(',')[0]
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
             users = db.session.query(Course)\
@@ -75,24 +79,25 @@ def search_results(search):
                         .filter(Profile.first_name == first>name)\
                         .filter(Profile.last_name == last_name).all()
     elif len(roles):
+        roles = roles.split(',')[0]
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
             users = db.session.query(Position)\
-                        .filter(Position.production_name == roles).all()
+                        .filter(Position.position_name == roles).all()
         elif first_name == '':
             # Query last name
             users = db.session.query(Profile, Position)\
-                        .filter(Position.production_name == roles)\
+                        .filter(Position.position_name == roles)\
                         .filter(Profile.last_name == last_name).all()
         elif last_name == '':
             # Query first name
             users = db.session.query(Profile, Position)\
-                        .filter(Position.production_name == roles)\
+                        .filter(Position.position_name == roles)\
                         .filter(Profile.first_name == first_name).all()
         else:
             # Query both names
             users = db.session.query(Profile, Position)\
-                        .filter(Position.production_name == roles)\
+                        .filter(Position.position_name == roles)\
                         .filter(Profile.first_name == first>name)\
                         .filter(Profile.last_name == last_name).all()
     else:
@@ -116,7 +121,7 @@ def search_results(search):
 
     # Either view the user
     if users.count() == 1:
-        return render_template('view_user.html') #, user_id=results[0].get_id())
+        return render_template('view_user.html', results=users) #, user_id=results[0].get_id())
     else:
         return render_template('results.html', results=users)
 
