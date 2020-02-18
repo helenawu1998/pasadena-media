@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+{% endblock %}
+{% block page %}
+
+<!-- uses donut as inspo -->
+<title>User Profile Page</title>
+	<div class='container theme-showcase jumbotron' style='float: none; padding-bottom: 25px'>
+    		<h2 align="center"> {{profile.first_name}} {{profile.last_name}} </h2>
+    	    <table>
+    		<tr>
+    			<th>Name:</th>
+    			<td>{{profile.first_name}} {{profile.last_name}}</td>
+    		</tr>
+            <tr>
+                <th>Preferred Name: </th>
+                 <td>{{profile.preferred_name}}</td>
+            </tr>
+    		<tr>
+    			<th>Contact Email:</th>
+                    <td>{{ profile.contact_email }}</td>
+    		</tr>
+    		<tr>
+                <th>Phone Number:</th>
+                    <td>{{ profile.phone }}</td>
+    		</tr>
+    		<tr>
+                <th>Positions:</th>
+		{% if positions %}
+                    <td>{{ positions }}</td>
+		{% else %}
+	 		<td>None </td>
+		{% endif %}
+		</tr>
+    		<tr>
+                <th>Courses:</th>
+		{% if courses %}
+                    <td>{{ courses }}</td>
+		{% else %}
+			<td> None </td>
+		{% endif %}
+    		</tr>
+            <tr>
+                <th>Notes: </th>
+		<td> {{profile.notes}} </td>
+            </tr>
+    	</table>
+    </div>
+
+
+{% endblock %}

@@ -2,7 +2,8 @@ import mimetypes
 from app import app
 from app.modules.directory_search.forms import PersonSearchForm
 from app.modules.directory_search import blueprint, helpers
-# from app.models import Profile, Course, Position, Production
+from app.modules.profile.helpers import serialize_positions, serialize_courses
+from app.models import User, Profile, Course, Position, Production
 from flask import flash, render_template, request, redirect, url_for
 # from [database] import database class
 
@@ -49,15 +50,15 @@ def search_results(search):
         return redirect(url_for('directory_search.index'))
 
     # Either view the user
-    if len(results) == 1:
-        return render_template('view_user.html') #, user_id=results[0].get_id())
-    else:
-        return render_template('results.html', results=results)
+    return render_template('results.html', results=results)
 
 @blueprint.route('/directory_search/users/<int:user_id>')
 def view_user(user_id):
-    user = helpers.get_user(user_id)
-    return render_template('view_user.html', results=user, user_id=user_id)
+    user = User.query.get(int(user_id))
+    profile = user.profile[0]
+    positions = profile.positions
+    courses = profile.courses
+    return render_template('user_profile.html', user=user, profile=profile, positions=serialize_positions(positions), courses=serialize_courses(courses))
 
 @blueprint.route('/directory_search/users/<int:user_id>/image')
 def get_image(user_id):

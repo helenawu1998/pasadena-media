@@ -6,7 +6,7 @@ from app.modules.profile.helpers import EditProfileForm, \
 from app.modules.profile import blueprint
 from flask_login import current_user
 
-@blueprint.route("/profile")
+@blueprint.route("/profile", methods=['GET'])
 def show_profile():
     #user, profile = get_user()
     #return render_template("profile.html", user=user, profile=profile)
