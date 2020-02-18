@@ -20,6 +20,12 @@ pip install -r requirements.txt
 
 # Database
 - Development: SQLite (with Flask-SQLAlchemy)
+- To set up your development database, run the following commands in Python:
+```
+from app import db
+db.create_all()
+```
+This should create a local file called app.db that will serve as your SQLite (development) database. Please do not add this file to the repository.
 
 # Testing
 - For now, run app locally and visit localhost:5000.
