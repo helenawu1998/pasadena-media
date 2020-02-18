@@ -29,10 +29,10 @@ def search_results(search):
     # flash(type(db.session.query(Profile).filter(Profile.first_name == first_name)))
     # Somehow search for the name
     flash(search.data)
+    users = db.session.query(Profile, Course, Position)
     if len(classes) and len(roles):
         classes = classes.split(',')[0]
         roles = roles.split(',')[0]
-        users = db.session.query(Profile, Course, Position)
         for c in classes:
             users = users.filter(Course.course_name == c)
         for r in roles:
@@ -111,6 +111,7 @@ def search_results(search):
         # return render_template('view_user.html', results=users) #, user_id=results[0].get_id())
     # else:
     users = users.all()
+    flash(users)
     return render_template('results.html', results=users)
 
 
