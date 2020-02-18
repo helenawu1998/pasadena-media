@@ -21,11 +21,11 @@
 						<tr>
 							<td>
 								<a href='{{ url_for("directory_search.view_user", user_id=user["user_id"]) }}'>
-									{{ user['first_name'] }}
+									{{ user['first_name'] }} {{ user['last_name'] }}
 								</a>
 							</td>
 							<td>
-								{{ user['last_name'] }}
+								No email right now lol
 							</td>
 							<!--
 							<td>{{ user['graduation_year'] or '' }}</td>

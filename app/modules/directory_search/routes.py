@@ -113,7 +113,7 @@ def search_results(search):
     users = users.all()
     return render_template('results.html', results=users)
 
-'''
+
 @blueprint.route('/directory_search/users/<int:user_id>')
 def view_user(user_id):
     user = User.query.get(int(user_id))
@@ -122,7 +122,7 @@ def view_user(user_id):
     courses = profile.courses
     return render_template('user_profile.html', user=user, profile=profile, positions=serialize_positions(positions), courses=serialize_courses(courses))
 
-
+'''
 @blueprint.route('/directory_search/users/<int:user_id>/image')
 def get_image(user_id):
     # Have some safety check that calls flask.abort(401)?
