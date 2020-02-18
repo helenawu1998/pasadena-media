@@ -102,8 +102,8 @@ def search_results(search):
             flash(type(first_name))
             flash(last_name)
             flash(users)
-            users = users.filter(Profile.first_name=='e')\
-                        .filter(Profile.last_name=='e')
+            users = users.filter(Profile.first_name == first_name)\
+                        .filter(Profile.last_name == last_name)
 
     # If there are no results
     if not users:
