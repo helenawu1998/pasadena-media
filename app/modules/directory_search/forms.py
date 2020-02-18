@@ -27,5 +27,5 @@ class PersonSearchForm(Form):
 '''
   first_name = StringField('First Name')
   last_name = StringField('Last Name')
-  roles = StringField('hi')
-  classes = StringField('Oh no')
+  roles = StringField('Roles (separated by commas)')
+  classes = StringField('Classes (separated by commas)')

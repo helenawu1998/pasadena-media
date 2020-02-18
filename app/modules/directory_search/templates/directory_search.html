@@ -280,8 +280,14 @@ function loadFilter(list_name) {
     <br><br>
     <p>
     {{ render_field(form.last_name) }}
+    <br><br>
+    <p>
+    {{ render_field(form.roles) }}
+    <br><br>
+    <p>
+    {{ render_field(form.classes) }}
   </dl>
   <br><br>
-  <input onclick = "loadFilter('rolesUL'); loadFilter('classesUL');" class = searchButton type=submit value=Search>
+  <input class = searchButton type=submit value=Search>
 </form>
 {% endblock %}
