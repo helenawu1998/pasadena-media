@@ -121,6 +121,27 @@ input {
 .addBtn:hover {
   background-color: #bbb;
 }
+
+.searchButton {
+  color: white;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  padding: 0 30px;
+  line-height: 30px;
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  background-image: linear-gradient(#335b71 45%, #03324c 55%);
+  box-shadow: 0 2px 2px #888888;
+  transition: color 0.3s, background-image 0.5s, ease-in-out;
+}
+.searchButton:hover {
+  background-image: linear-gradient(#b1ccda 49%, #96b4c5 51%);
+  color: #03324c;
+}
+
 </style>
 </head>
 <body>
@@ -181,6 +202,7 @@ for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     var div = this.parentElement;
     div.style.display = "none";
+    div.parentNode.removeChild(div);
   }
 }
 
@@ -208,9 +230,34 @@ function newElement(input_name, list_name) {
     close[i].onclick = function() {
       var div = this.parentElement;
       div.style.display = "none";
+      div.parentNode.removeChild(div);
     }
   }
 }
+
+// Get list items
+function loadFilter(list_name) {
+    var element = document.getElementById(list_name);
+    var children = element.children;
+    var filtered = [];
+    for (var i = 0; i < children.length; i++) {
+        child = children[i].textContent
+        filtered.push(child.slice(0,-1)); // Get everything but last character
+    }
+    //alert(filtered)
+    alert("HEY");
+
+    $.ajax({
+    url: Flask.url_for('classes_and_roles'),
+    type: 'POST',
+    data: JSON.stringify(filtered),   // converts js value to JSON string
+    })
+    .done(function(result){     // on success get the return object from server
+        console.log(result)     // do whatever with it. In this case see it in console
+    }
+    return filtered;
+}
+
 </script>
 
 </body>
@@ -230,9 +277,17 @@ function newElement(input_name, list_name) {
   <dl>
     <p>
     {{ render_field(form.first_name) }}
+    <br><br>
     <p>
     {{ render_field(form.last_name) }}
+    <br><br>
+    <p>
+    {{ render_field(form.roles) }}
+    <br><br>
+    <p>
+    {{ render_field(form.classes) }}
   </dl>
-  <p><input type=submit value=Search>
+  <br><br>
+  <input class = searchButton type=submit value=Search>
 </form>
 {% endblock %}
