@@ -33,87 +33,73 @@ def search_results(search):
         classes = classes.split(',')[0]
         roles = roles.split(',')[0]
         users = db.session.query(Profile, Course, Position)
+        for c in classes:
+            users = users.filter(Course.course_name == c)
+        for r in roles:
+            users = users.filter(Position.position_name == r)
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
-            users = db.session.query(Course, Position)\
-                        .filter(Course.course_name == classes)\
-                        .filter(Position.position_name == roles).all()
+            # Already done above
+            pass
         elif first_name == '':
             # Query last name
-            users = db.session.query(Profile, Course, Position)\
-                        .filter(Course.course_name == classes)\
-                        .filter(Position.position_name == roles)\
-                        .filter(Profile.last_name == last_name).all()
+            users = users.filter(Profile.last_name == last_name)
         elif last_name == '':
             # Query first name
-            users = db.session.query(Profile, Course, Position)\
-                        .filter(Course.course_name == classes)\
-                        .filter(Position.position_name == roles)\
-                        .filter(Profile.first_name == first_name).all()
+            users = users.filter(Profile.first_name == first_name)
         else:
             # Query both names
-            users = db.session.query(Profile, Course, Position)\
-                        .filter(Course.course_name == classes)\
-                        .filter(Position.position_name == roles)\
-                        .filter(Profile.first_name == first_name)\
-                        .filter(Profile.last_name == last_name).all()
+            users = users.filter(Profile.first_name == first_name)\
+                        .filter(Profile.last_name == last_name)
     elif len(classes):
         classes = classes.split(',')[0]
+        users = db.session.query(Profile, Course)
+        for c in classes:
+            users = users.filter(Course.course_name == c)
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
-            users = db.session.query(Course)\
-                        .filter(Course.course_name == classes).all()
+            # Already done
+            pass
         elif first_name == '':
             # Query last name
-            users = db.session.query(Profile, Course)\
-                        .filter(Course.course_name == classes)\
-                        .filter(Profile.last_name == last_name).all()
+            users = users.filter(Profile.last_name == last_name)
         elif last_name == '':
             # Query first name
-            users = db.session.query(Profile, Course)\
-                        .filter(Course.course_name == classes)\
-                        .filter(Profile.first_name == first_name).all()
+            users = users.filter(Profile.first_name == first_name)
         else:
             # Query both names
-            users = db.session.query(Profile, Course)\
-                        .filter(Course.course_name == classes)\
-                        .filter(Profile.first_name == first_name)\
-                        .filter(Profile.last_name == last_name).all()
+            users = users.filter(Profile.first_name == first_name)\
+                        .filter(Profile.last_name == last_name)
     elif len(roles):
         roles = roles.split(',')[0]
+        for r in roles:
+            users = users.filter(Position.position_name == r)
         if first_name == '' and last_name == '':
             # Query all people who have taken these classes with these roles
-            users = db.session.query(Position)\
-                        .filter(Position.position_name == roles).all()
+            # Already done
+            pass
         elif first_name == '':
             # Query last name
-            users = db.session.query(Profile, Position)\
-                        .filter(Position.position_name == roles)\
-                        .filter(Profile.last_name == last_name).all()
+            users = users.filter(Profile.last_name == last_name)
         elif last_name == '':
             # Query first name
-            users = db.session.query(Profile, Position)\
-                        .filter(Position.position_name == roles)\
-                        .filter(Profile.first_name == first_name).all()
+            users = users.filter(Profile.first_name == first_name)
         else:
             # Query both names
-            users = db.session.query(Profile, Position)\
-                        .filter(Position.position_name == roles)\
-                        .filter(Profile.first_name == first_name)\
-                        .filter(Profile.last_name == last_name).all()
+            users = users.filter(Profile.first_name == first_name)\
+                        .filter(Profile.last_name == last_name)
     else:
         if first_name == '' and last_name == '':
             flash('Please specify either a name or a role')
             return redirect(url_for('directory_search.index'))
         elif first_name == '':
-            users = db.session.query(Profile).filter(Profile.last_name == last_name).all()
+            users = users.filter(Profile.last_name == last_name)
         elif last_name == '':
-            users = db.session.query(Profile).filter(Profile.first_name == first_name).all()
+            users = users.filter(Profile.first_name == first_name)
         else:
             # TODO: Query search of role and name
-            users = db.session.query(Profile)\
-                            .filter(Profile.first_name == first_name)\
-                            .filter(Profile.last_name == last_name)
+            users = users.filter(Profile.first_name == first_name)\
+                        .filter(Profile.last_name == last_name)
 
     # If there are no results
     if not users:
@@ -124,6 +110,7 @@ def search_results(search):
     # if users.count() == 1:
         # return render_template('view_user.html', results=users) #, user_id=results[0].get_id())
     # else:
+    users = users.all()
     return render_template('results.html', results=users)
 
 
