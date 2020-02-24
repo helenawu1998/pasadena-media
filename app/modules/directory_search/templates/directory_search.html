@@ -246,15 +246,6 @@ function loadFilter(list_name) {
     }
     //alert(filtered)
     alert("HEY");
-
-    $.ajax({
-    url: Flask.url_for('classes_and_roles'),
-    type: 'POST',
-    data: JSON.stringify(filtered),   // converts js value to JSON string
-    })
-    .done(function(result){     // on success get the return object from server
-        console.log(result)     // do whatever with it. In this case see it in console
-    }
     return filtered;
 }
 
